@@ -128,9 +128,9 @@
   .view-all-card:hover .va-default { opacity: 0; transform: translateY(-8px); }
   .view-all-card:hover .va-hover-state { opacity: 1; transform: translateY(0); }
   .va-text { font-family: var(--font-display); font-size: clamp(26px,3.5vw,42px); font-weight: 400; color: var(--white); letter-spacing: -1px; line-height: 1.1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-  .va-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.45); display: inline-flex; align-items: center; justify-content: center; }
+  .va-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid currentColor; opacity: 0.65; display: inline-flex; align-items: center; justify-content: center; transition: var(--transition); }
   .va-hover-top { font-family: var(--font-display); font-size: clamp(20px,2.8vw,34px); font-weight: 400; color: var(--white); letter-spacing: -0.8px; line-height: 1.1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .va-circle-sm { width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .va-circle-sm { width: 44px; height: 44px; border-radius: 50%; border: 2px solid currentColor; opacity: 0.65; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: var(--transition); }
   .va-chars { display: flex; gap: 1rem; align-items: flex-end; }
 
   /* PROCESS */
@@ -317,7 +317,7 @@
       <div class="about-cta">
         <a href="./Tobiloba_Julius_Resume.docx" download="Tobiloba_Julius_Resume.docx" class="btn-primary">
           Download CV
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="about-small-photos">
@@ -383,7 +383,7 @@
         <div class="va-text">
           View all<br/>project
           <span class="va-circle">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15L15 5M15 5H8M15 5V12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </span>
         </div>
       </div>
@@ -392,7 +392,7 @@
         <div class="va-hover-top">
           View all project
           <span class="va-circle-sm">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 14L14 4M14 4H7M14 4V11" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 14L14 4M14 4H7M14 4V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           </span>
         </div>
         <div class="va-chars" style="width: 100%; justify-content: center; align-items: flex-end; flex: 1; padding-top: 1rem;">
@@ -415,27 +415,27 @@
   <div>
     <div class="process-card">
       <div><div class="process-num">01</div><h3>Understanding the vision.</h3><p>Diving into goals, audience, and the bigger picture before touching a single pixel.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"><circle cx="60" cy="45" r="30"/><path d="M60 15C60 15 74 25 74 45S60 75 60 75"/><path d="M60 15C60 15 46 25 46 45S60 75 60 75"/><path d="M30 45h60"/><path d="M34 30h52M34 60h52"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"><circle cx="60" cy="45" r="30"/><path d="M60 15C60 15 74 25 74 45S60 75 60 75"/><path d="M60 15C60 15 46 25 46 45S60 75 60 75"/><path d="M30 45h60"/><path d="M34 30h52M34 60h52"/></svg></div>
     </div>
     <div class="process-card">
       <div><div class="process-num">02</div><h3>Studying the experience.</h3><p>Exploring competitors, behaviors, and interaction patterns to uncover opportunities.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"><rect x="15" y="20" width="38" height="30" rx="4"/><rect x="67" y="20" width="38" height="30" rx="4"/><rect x="41" y="58" width="38" height="12" rx="3"/><path d="M34 58v-8M86 58v-8"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"><rect x="15" y="20" width="38" height="30" rx="4"/><rect x="67" y="20" width="38" height="30" rx="4"/><rect x="41" y="58" width="38" height="12" rx="3"/><path d="M34 58v-8M86 58v-8"/></svg></div>
     </div>
     <div class="process-card">
       <div><div class="process-num">03</div><h3>Shaping the structure.</h3><p>Building wireframes and flows that create clarity, direction, and smooth navigation.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="8" width="104" height="16" rx="3"/><rect x="8" y="30" width="48" height="52" rx="3"/><rect x="62" y="30" width="50" height="23" rx="3"/><rect x="62" y="59" width="50" height="23" rx="3"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="8" width="104" height="16" rx="3"/><rect x="8" y="30" width="48" height="52" rx="3"/><rect x="62" y="30" width="50" height="23" rx="3"/><rect x="62" y="59" width="50" height="23" rx="3"/></svg></div>
     </div>
     <div class="process-card">
       <div><div class="process-num">04</div><h3>Crafting the identity.</h3><p>Designing typography, colors, components, and visuals that give the product personality.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke-linecap="round"><circle cx="32" cy="45" r="20" stroke="#111" stroke-width="1.5"/><circle cx="60" cy="45" r="20" stroke="#666" stroke-width="1.5"/><circle cx="88" cy="45" r="20" stroke="#aaa" stroke-width="1.5"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke-linecap="round"><circle cx="32" cy="45" r="20" stroke="var(--black)" stroke-width="1.5"/><circle cx="60" cy="45" r="20" stroke="var(--mid)" stroke-width="1.5"/><circle cx="88" cy="45" r="20" stroke="var(--muted)" stroke-width="1.5"/></svg></div>
     </div>
     <div class="process-card">
       <div><div class="process-num">05</div><h3>Bringing it to life.</h3><p>Creating interactive prototypes, motion, and transitions that make the experience feel alive.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="8" width="104" height="74" rx="10"/><path d="M44 45h32M60 29l16 16-16 16"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="8" width="104" height="74" rx="10"/><path d="M44 45h32M60 29l16 16-16 16"/></svg></div>
     </div>
     <div class="process-card">
       <div><div class="process-num">06</div><h3>Refining the details.</h3><p>Polishing every interaction until the final experience feels effortless and intentional.</p></div>
-      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"><path d="M15 65L45 32 68 52 105 18"/><circle cx="45" cy="32" r="4" fill="#111" stroke="none"/><circle cx="68" cy="52" r="4" fill="#111" stroke="none"/><circle cx="105" cy="18" r="4" fill="#111" stroke="none"/></svg></div>
+      <div class="process-visual"><svg viewBox="0 0 120 90" fill="none" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"><path d="M15 65L45 32 68 52 105 18"/><circle cx="45" cy="32" r="4" fill="var(--black)" stroke="none"/><circle cx="68" cy="52" r="4" fill="var(--black)" stroke="none"/><circle cx="105" cy="18" r="4" fill="var(--black)" stroke="none"/></svg></div>
     </div>
   </div>
   <div style="height:55vh"></div>
