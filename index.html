@@ -148,8 +148,26 @@
   .process-visual svg { width: 55%; height: auto; opacity: 0.35; }
 
   /* PLAYGROUND */
-  .playground-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .play-card { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4/5; background: var(--surface); }
+  .playground-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .play-card { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4/5; background: var(--surface); position: relative; }
+  .play-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+  .play-card:hover img { transform: scale(1.04); }
+  .play-card.cta-card {
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  }
+  .play-card.cta-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+  .play-card.cta-card svg {
+    transition: transform 0.3s ease;
+  }
+  .play-card.cta-card:hover svg {
+    transform: translate(2px, -2px);
+  }
+  body.dark .play-card.cta-card:hover {
+    box-shadow: 0 12px 32px rgba(255,255,255,0.04);
+  }
 
   /* TESTIMONIALS */
   .t-scroll-wrap { overflow: hidden; padding: 4px 0 2rem; mask-image: linear-gradient(to right, transparent 0%, black 4%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 92%, transparent 100%); }
@@ -233,6 +251,9 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   /* RESPONSIVE */
+  @media (max-width: 1080px) and (min-width: 861px) {
+    .playground-grid { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 860px) {
     nav ul { display: none; }
     .about-grid, .work-grid, .playground-grid { grid-template-columns: 1fr; }
@@ -240,6 +261,277 @@
     .process-card { grid-template-columns: 1fr; }
     .site-footer { grid-template-columns: 1fr; text-align: center; }
     .site-footer .fr { text-align: center; }
+  }
+
+  /* ARCHIVE OVERLAY */
+  .arc-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+  }
+  .arc-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+  }
+  .arc-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .arc-filter-btn {
+    background: transparent;
+    border: 1.5px solid var(--btn-outline-border);
+    color: var(--black);
+    padding: 6px 14px;
+    border-radius: var(--r-pill);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .arc-filter-btn:hover {
+    background: var(--surface);
+  }
+  .arc-filter-btn.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+  .arc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    width: 100%;
+    padding-bottom: 3rem;
+  }
+  .arc-card {
+    background: var(--white);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s, opacity 0.4s ease;
+    position: relative;
+  }
+  .arc-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+  }
+  body.dark .arc-card:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  }
+  .arc-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .arc-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .arc-card:hover .arc-thumb img {
+    transform: scale(1.03);
+  }
+  .arc-info {
+    padding: 1rem;
+  }
+  .arc-info h4 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--black);
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .arc-info p {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* LIGHTBOX OVERLAY */
+  .lb-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.92);
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 2rem;
+  }
+  .lb-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .lb-img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: var(--r-sm);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    display: block;
+  }
+  .lb-overlay.active .lb-img {
+    transform: scale(1);
+  }
+  .lb-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    padding: 0;
+  }
+  .lb-close:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: white;
+    transform: scale(1.05);
+  }
+
+  /* CASE STUDY OVERLAY */
+  .cs-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(30px) scale(0.98);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+  }
+  .cs-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0) scale(1);
+  }
+  .cs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem var(--pad);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 1010;
+    transition: var(--transition);
+  }
+  .cs-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cs-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .cs-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 500;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .cs-desc {
+    font-size: 13.5px;
+    color: var(--mid);
+    margin-top: 2px;
+  }
+  .cs-close {
+    background: transparent;
+    border: 1.5px solid var(--btn-outline-border);
+    color: var(--black);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s, var(--transition);
+    padding: 0;
+  }
+  .cs-close:hover {
+    background: var(--surface);
+    transform: scale(1.05);
+  }
+  .cs-close:active {
+    transform: scale(0.95);
+  }
+  .cs-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2.5rem var(--pad);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    scroll-behavior: smooth;
+  }
+  .cs-content img {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: var(--r-md);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-light);
+    display: block;
+    height: auto;
+    transition: var(--transition);
+  }
+  body.dark .cs-content img {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  }
+  body.cs-open {
+    overflow: hidden;
   }
 </style>
 </head>
@@ -324,13 +616,21 @@
         </a>
       </div>
       <div class="about-small-photos">
-        <div class="about-sm-photo" style="min-height:110px;"></div>
-        <div class="about-sm-photo" style="min-height:110px;background:#ccc8c2;"></div>
-        <div class="about-sm-photo" style="min-height:110px;background:#c4c0ba;"></div>
+        <div class="about-sm-photo" style="min-height:110px;">
+          <img src="./Image/about_setup.png" alt="Minimalist Workspace Setup" />
+        </div>
+        <div class="about-sm-photo" style="min-height:110px;background:#ccc8c2;">
+          <img src="./Image/about_process.png" alt="Creative Wireframes Process" />
+        </div>
+        <div class="about-sm-photo" style="min-height:110px;background:#c4c0ba;">
+          <img src="./Image/about_detail.png" alt="Design swatches detail" />
+        </div>
       </div>
     </div>
     <!-- RIGHT: tall photo -->
-    <div class="about-main-photo"></div>
+    <div class="about-main-photo">
+      <img src="./Image/tobiloba_profile.png" alt="Tobiloba Julius Adelani Portrait" />
+    </div>
   </div>
 </div>
 </div>
@@ -344,35 +644,35 @@
   </div>
   <div class="work-grid reveal">
 
-    <a href="#" class="work-card">
+    <a href="#" class="work-card" data-project="echoform">
       <div class="work-thumb" style="background:#cac3f5;">
         <img src="./Image/Echoform.png" alt="Echoform" />
       </div>
       <div class="work-info"><h3>ECHOFORM™</h3><p>Studio booking experience designed for modern creators.</p><div class="work-tags"><span class="tag">UI/UX design</span><span class="tag">Website design</span><span class="tag">Landing page</span></div></div>
     </a>
 
-    <a href="#" class="work-card">
+    <a href="#" class="work-card" data-project="omooba">
       <div class="work-thumb" style="background:#8fbc2a;">
         <img src="./Image/Omooba.png" alt="Omooba" />
       </div>
       <div class="work-info"><h3>Omooba Trad Fashion Mobile App</h3><p>Modern cultural e-commerce, reimagined for mobile.</p><div class="work-tags"><span class="tag">Mobile UI/UX</span><span class="tag">E-Commerce</span><span class="tag">Cultural Branding</span></div></div>
     </a>
 
-    <a href="#" class="work-card">
+    <a href="#" class="work-card" data-project="vaultify">
       <div class="work-thumb" style="background:#ddeeff;">
         <img src="./Image/Vaultify.png" alt="Vaultify" />
       </div>
       <div class="work-info"><h3>Vaultify Fintech Landing Page</h3><p>Modern fintech experience with focused UI</p><div class="work-tags"><span class="tag">UI/UX design</span><span class="tag">Fintech</span><span class="tag">Landing page</span></div></div>
     </a>
 
-    <a href="#" class="work-card">
+    <a href="#" class="work-card" data-project="rooted">
       <div class="work-thumb" style="background:#181a17;">
         <img src="./Image/Rootedstudio.png" alt="Rooted Studio" />
       </div>
       <div class="work-info"><h3>Rooted Studio</h3><p>Minimalist landing page driving converting client inquiries.</p><div class="work-tags"><span class="tag">Web Design</span><span class="tag">Minimalist UI</span><span class="tag">Conversion Focus</span></div></div>
     </a>
 
-    <a href="#" class="work-card">
+    <a href="#" class="work-card" data-project="swiftdrop">
       <div class="work-thumb" style="background:#0c180d;">
         <img src="./Image/Swiftdrop.png" alt="Swiftdrop" />
       </div>
@@ -380,7 +680,7 @@
     </a>
 
     <!-- VIEW ALL — hover reveals characters -->
-    <a href="#" class="view-all-card" aria-label="View all projects">
+    <a href="https://www.behance.net/adelanitobiloba" target="_blank" rel="noopener noreferrer" class="view-all-card" aria-label="View all projects">
       <!-- Default state -->
       <div class="va-state va-default">
         <div class="va-text">
@@ -454,10 +754,23 @@
     <p class="section-sub">Not everything starts with a wireframe.</p>
   </div>
   <div class="playground-grid reveal">
-    <div class="play-card" style="background:#c8c3bc"></div>
-    <div class="play-card" style="background:#b5b0aa"></div>
-    <div class="play-card" style="background:#a8a39d"></div>
-    <div class="play-card" style="background:#9b9690"></div>
+    <div class="play-card" style="background:#c8c3bc"><img src="./Image/Randon UI/MacBook Pro 16_ - 1 (3).png" alt="MacBook Pro 16 Design Specimen" /></div>
+    <div class="play-card" style="background:#b5b0aa"><img src="./Image/Randon UI/20260321_140332.jpg" alt="Creative Interface Composition" /></div>
+    <div class="play-card" style="background:#a8a39d"><img src="./Image/Randon UI/Desktop - 3 (2).png" alt="Fintech Dashboard Layout" /></div>
+    <div class="play-card" style="background:#9b9690"><img src="./Image/Randon UI/20260329_115848.jpg" alt="Sleek Visual Flow Specification" /></div>
+    <div class="play-card" style="background:#c8c3bc"><img src="./Image/Randon UI/Desktop - 17 (2).png" alt="Dark Mode UI Screen Detail" /></div>
+    <div class="play-card" style="background:#b5b0aa"><img src="./Image/Randon UI/Snapchat-1265570854.jpg" alt="Mobile App Interaction Spec" /></div>
+    <div class="play-card" style="background:#a8a39d"><img src="./Image/Randon UI/Frame 2147226175 (1).png" alt="E-Commerce Mobile Grid flow" /></div>
+    <div class="play-card" style="background:#9b9690"><img src="./Image/Randon UI/Snapchat-700927865.jpg" alt="Cultural Fashion Mobile Screen" /></div>
+    
+    <!-- 9th Bento Cell - Twitter/X Call to Action -->
+    <a href="https://x.com/Julious_design" target="_blank" rel="noopener noreferrer" class="play-card cta-card" style="background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: space-between; padding: 1.75rem; text-decoration: none;">
+      <span style="font-size: 11px; font-weight: 700; opacity: 0.65; letter-spacing: 1.2px; text-transform: uppercase;">EXPLORE MORE</span>
+      <div style="font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 28px); line-height: 1.15; font-weight: 400; letter-spacing: -0.5px;">View more<br/>experiments<br/>on Twitter / X.</div>
+      <div style="width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid currentColor; display: flex; align-items: center; justify-content: center; margin-top: 1rem; align-self: flex-start;">
+        <svg width="15" height="15" viewBox="0 0 18 18" fill="none"><path d="M4 14L14 4M14 4H7M14 4V11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </div>
+    </a>
   </div>
 </div>
 </div>
@@ -611,6 +924,66 @@
   <div class="fr"><p>DBL © 2026</p><p style="margin-top:2px;font-size:12px;color:var(--muted)">designed with zero lazy pixels.</p></div>
 </footer>
 
+<!-- CASE STUDY OVERLAY MODAL -->
+<div id="case-study-modal" class="cs-overlay" aria-hidden="true" role="dialog">
+  <div class="cs-header">
+    <div class="cs-meta">
+      <span id="cs-modal-tag" class="cs-tag"></span>
+      <h2 id="cs-modal-title" class="cs-title"></h2>
+      <p id="cs-modal-desc" class="cs-desc"></p>
+    </div>
+    <button id="cs-close-btn" class="cs-close" aria-label="Close Case Study">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="cs-content" id="cs-modal-body">
+    <!-- Screenshots will render here -->
+  </div>
+</div>
+
+<!-- PROJECT ARCHIVE OVERLAY MODAL -->
+<div id="archive-modal" class="arc-overlay" aria-hidden="true" role="dialog">
+  <div class="cs-header">
+    <div class="cs-meta">
+      <span class="cs-tag">DESIGN EXPLORATIONS</span>
+      <h2 class="cs-title">PROJECT ARCHIVE</h2>
+      <p class="cs-desc">A comprehensive collection of custom mobile apps, bento UI layout specs, and landing pages.</p>
+      <div class="arc-filters">
+        <button class="arc-filter-btn active" data-filter="all">All</button>
+        <button class="arc-filter-btn" data-filter="mobile">Mobile UI</button>
+        <button class="arc-filter-btn" data-filter="web">Websites</button>
+        <button class="arc-filter-btn" data-filter="fintech">Fintech</button>
+        <button class="arc-filter-btn" data-filter="specs">UI Specs</button>
+      </div>
+    </div>
+    <button id="arc-close-btn" class="cs-close" aria-label="Close Archive">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="cs-content">
+    <div id="arc-grid-body" class="arc-grid">
+      <!-- Generated archive cards will render here dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- FULLSCREEN LIGHTBOX OVERLAY -->
+<div id="lightbox-modal" class="lb-overlay" aria-hidden="true" role="dialog">
+  <button id="lb-close" class="lb-close" aria-label="Close Lightbox">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <img id="lb-img" class="lb-img" src="" alt="Case study full screenshot detail" />
+</div>
+
 <script>
   // Theme Toggle Logic
   const themeToggle = document.getElementById('theme-toggle');
@@ -648,6 +1021,265 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Case Study Overlay Modal logic
+  const projectData = {
+    echoform: {
+      title: "ECHOFORM™",
+      tag: "UI/UX DESIGN • WEBSITE DESIGN",
+      desc: "Studio booking experience designed for modern creators.",
+      images: [
+        "./Image/Echoform/Hero section.png",
+        "./Image/Echoform/Second section.png",
+        "./Image/Echoform/Third section.png",
+        "./Image/Echoform/Pricing section.png",
+        "./Image/Echoform/footer.png"
+      ]
+    },
+    omooba: {
+      title: "Omooba Trad Fashion App",
+      tag: "MOBILE UI/UX • E-COMMERCE",
+      desc: "Modern cultural e-commerce, reimagined for traditional African fashion.",
+      images: [
+        "./Image/Omooba/Casestudy cover.png",
+        "./Image/Omooba/Onboarding screens.png",
+        "./Image/Omooba/Home flows.png",
+        "./Image/Omooba/Other core screens.png",
+        "./Image/Omooba/Footer.png"
+      ]
+    },
+    vaultify: {
+      title: "Vaultify Fintech Platform",
+      tag: "UI/UX DESIGN • FINTECH • LANDING PAGE",
+      desc: "Modern fintech experience with a dark-mode-first glassmorphism design.",
+      images: [
+        "./Image/Vaultify/Hero section.png",
+        "./Image/Vaultify/How it works secton.png",
+        "./Image/Vaultify/Feature section.png",
+        "./Image/Vaultify/Pricing section.png",
+        "./Image/Vaultify/Testimonial section.png",
+        "./Image/Vaultify/footer.png"
+      ]
+    },
+    rooted: {
+      title: "Rooted Studio",
+      tag: "WEB DESIGN • MINIMALIST UI",
+      desc: "Minimalist landing page driving high-converting client inquiries.",
+      images: [
+        "./Image/rooted studio/Hero section.png",
+        "./Image/rooted studio/Our vision.png",
+        "./Image/rooted studio/Features.png",
+        "./Image/rooted studio/Our work.png",
+        "./Image/rooted studio/Testimonials.png"
+      ]
+    },
+    swiftdrop: {
+      title: "Swiftdrop Logistics",
+      tag: "PRODUCT DESIGN • LOGISTICS UI • MOBILE APP",
+      desc: "End-to-end package tracking workflows simplified into an intuitive mobile experience.",
+      images: [
+        "./Image/Swiftdrop/Logostics hero section (1).png",
+        "./Image/Swiftdrop/Home screen (Onboarding).png",
+        "./Image/Swiftdrop/Mobile app presnetation.png",
+        "./Image/Swiftdrop/Order Tracking screen.png",
+        "./Image/Swiftdrop/Payment & Address Management Screen.png",
+        "./Image/Swiftdrop/Settings Screen.png"
+      ]
+    }
+  };
+
+  const csModal = document.getElementById('case-study-modal');
+  const csTitle = document.getElementById('cs-modal-title');
+  const csTag = document.getElementById('cs-modal-tag');
+  const csDesc = document.getElementById('cs-modal-desc');
+  const csBody = document.getElementById('cs-modal-body');
+  const csCloseBtn = document.getElementById('cs-close-btn');
+
+  document.querySelectorAll('.work-card[data-project]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const projectKey = card.getAttribute('data-project');
+      const data = projectData[projectKey];
+      if (!data) return;
+
+      csTitle.textContent = data.title;
+      csTag.textContent = data.tag;
+      csDesc.textContent = data.desc;
+      
+      csBody.innerHTML = '';
+      data.images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${data.title} - Case Study Detail`;
+        img.loading = 'lazy';
+        csBody.appendChild(img);
+      });
+
+      csModal.classList.add('active');
+      csModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cs-open');
+      csBody.scrollTop = 0;
+    });
+  });
+
+  function closeCsModal() {
+    csModal.classList.remove('active');
+    csModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cs-open');
+  }
+
+  csCloseBtn.addEventListener('click', closeCsModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && csModal.classList.contains('active')) {
+      closeCsModal();
+    }
+  });
+
+  // Project Archive Overlay logic
+  const archiveItems = [
+    // Swiftdrop
+    { src: "./Image/Swiftdrop/Logostics hero section (1).png", title: "Logistics Hero Section", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Home screen (Onboarding).png", title: "Logistics Onboarding", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Mobile app presnetation.png", title: "App Presentation Mockups", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Order Tracking screen.png", title: "Real-time Order Tracking", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Payment & Address Management Screen.png", title: "Address & Payment Flows", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Settings Screen.png", title: "Logistics App Settings", project: "SwiftDrop", category: "mobile" },
+
+    // Omooba
+    { src: "./Image/Omooba/Casestudy cover.png", title: "Traditional Fashion Cover", project: "Omooba", category: "mobile" },
+    { src: "./Image/Omooba/Onboarding screens.png", title: "Onboarding Screens", project: "Omooba", category: "mobile" },
+    { src: "./Image/Omooba/Home flows.png", title: "E-Commerce User Flows", project: "Omooba", category: "mobile" },
+    { src: "./Image/Omooba/Other core screens.png", title: "Customization & Details", project: "Omooba", category: "mobile" },
+    { src: "./Image/Omooba/Footer.png", title: "Traditional Checkout Layout", project: "Omooba", category: "mobile" },
+
+    // Vaultify
+    { src: "./Image/Vaultify/Hero section.png", title: "Fintech Asymmetric Hero", project: "Vaultify", category: "fintech" },
+    { src: "./Image/Vaultify/How it works secton.png", title: "Glow Layout Grid", project: "Vaultify", category: "fintech" },
+    { src: "./Image/Vaultify/Feature section.png", title: "Feature Showcase Grid", project: "Vaultify", category: "fintech" },
+    { src: "./Image/Vaultify/Pricing section.png", title: "Fintech Tier Matrix", project: "Vaultify", category: "fintech" },
+    { src: "./Image/Vaultify/Testimonial section.png", title: "Interactive Social Wall", project: "Vaultify", category: "fintech" },
+    { src: "./Image/Vaultify/footer.png", title: "Conversion Block & Footer", project: "Vaultify", category: "fintech" },
+
+    // Echoform
+    { src: "./Image/Echoform/Hero section.png", title: "Studio Booking Hero", project: "Echoform", category: "web" },
+    { src: "./Image/Echoform/Second section.png", title: "Visual Space Grid Layout", project: "Echoform", category: "web" },
+    { src: "./Image/Echoform/Third section.png", title: "Creative Storyboard Section", project: "Echoform", category: "web" },
+    { src: "./Image/Echoform/Pricing section.png", title: "Studio Rate Sheet", project: "Echoform", category: "web" },
+    { src: "./Image/Echoform/footer.png", title: "Booking Footer Details", project: "Echoform", category: "web" },
+
+    // Rooted Studio
+    { src: "./Image/rooted studio/Hero section.png", title: "Minimalist Studio Hero", project: "Rooted Studio", category: "web" },
+    { src: "./Image/rooted studio/Our vision.png", title: "Client Vision & Core Values", project: "Rooted Studio", category: "web" },
+    { src: "./Image/rooted studio/Features.png", title: "Feature Grid Block", project: "Rooted Studio", category: "web" },
+    { src: "./Image/rooted studio/Our work.png", title: "Design Specimen Portfolio", project: "Rooted Studio", category: "web" },
+    { src: "./Image/rooted studio/Testimonials.png", title: "Client Endorsements Grid", project: "Rooted Studio", category: "web" },
+
+    // Randon UI
+    { src: "./Image/Randon UI/MacBook Pro 16_ - 1 (3).png", title: "Interactive Espec Mockup", project: "Playground", category: "specs" },
+    { src: "./Image/Randon UI/Desktop - 3 (2).png", title: "Fintech Dashboard Concept", project: "Playground", category: "fintech" },
+    { src: "./Image/Randon UI/Desktop - 17 (2).png", title: "Dark Mode Layout Spec", project: "Playground", category: "specs" },
+    { src: "./Image/Randon UI/Frame 2147226175 (1).png", title: "Checkout User Grid Flow", project: "Playground", category: "specs" },
+    { src: "./Image/Randon UI/20260321_140332.jpg", title: "Creative Layout Specimen", project: "Playground", category: "specs" },
+    { src: "./Image/Randon UI/20260329_115848.jpg", title: "UI Grid Spec Detail", project: "Playground", category: "specs" },
+    { src: "./Image/Randon UI/Snapchat-1265570854.jpg", title: "App Flow Spec Render", project: "Playground", category: "mobile" },
+    { src: "./Image/Randon UI/Snapchat-700927865.jpg", title: "Cultural Flow Specs", project: "Playground", category: "mobile" }
+  ];
+
+  const viewAllBtn = document.querySelector('.view-all-card');
+  const arcModal = document.getElementById('archive-modal');
+  const arcCloseBtn = document.getElementById('arc-close-btn');
+  const arcGrid = document.getElementById('arc-grid-body');
+  const filterBtns = document.querySelectorAll('.arc-filter-btn');
+
+  // Prevent default and trigger modal
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openArchiveModal();
+    });
+  }
+
+  function openArchiveModal() {
+    renderArchiveItems('all');
+    arcModal.classList.add('active');
+    arcModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cs-open');
+  }
+
+  function closeArchiveModal() {
+    arcModal.classList.remove('active');
+    arcModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('cs-open');
+  }
+
+  arcCloseBtn.addEventListener('click', closeArchiveModal);
+
+  function renderArchiveItems(filter) {
+    arcGrid.innerHTML = '';
+    const itemsToRender = filter === 'all' ? archiveItems : archiveItems.filter(item => item.category === filter);
+    
+    itemsToRender.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'arc-card';
+      card.innerHTML = `
+        <div class="arc-thumb">
+          <img src="${item.src}" alt="${item.title}" loading="lazy" />
+        </div>
+        <div class="arc-info">
+          <h4>${item.title}</h4>
+          <p>${item.project}</p>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        openLightbox(item.src);
+      });
+      arcGrid.appendChild(card);
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderArchiveItems(btn.getAttribute('data-filter'));
+    });
+  });
+
+  // Lightbox logic
+  const lbModal = document.getElementById('lightbox-modal');
+  const lbImg = document.getElementById('lb-img');
+  const lbCloseBtn = document.getElementById('lb-close');
+
+  function openLightbox(src) {
+    lbImg.src = src;
+    lbModal.classList.add('active');
+    lbModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLightbox() {
+    lbModal.classList.remove('active');
+    lbModal.setAttribute('aria-hidden', 'true');
+  }
+
+  lbCloseBtn.addEventListener('click', closeLightbox);
+  
+  lbModal.addEventListener('click', (e) => {
+    if (e.target === lbModal || e.target.closest('.lb-close')) {
+      closeLightbox();
+    }
+  });
+
+  // ESC close listeners
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (lbModal.classList.contains('active')) {
+        closeLightbox();
+      } else if (arcModal.classList.contains('active')) {
+        closeArchiveModal();
+      }
+    }
+  });
 </script>
 </body>
 </html>
