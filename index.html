@@ -102,8 +102,12 @@
   .about-small-photos { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 2rem; }
   .about-sm-photo { aspect-ratio: 1; border-radius: var(--r-md); overflow: hidden; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); }
   .about-sm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .about-main-photo { border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); width: 100%; aspect-ratio: 3/4; min-height: 440px; }
-  .about-main-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-main-photo { position: relative; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); width: 100%; aspect-ratio: 3/4; min-height: 440px; }
+  .about-main-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+  .about-main-photo img.hover-img { opacity: 0; transform: scale(1.05); }
+  .about-main-photo:hover img.hover-img { opacity: 1; transform: scale(1); }
+  .about-main-photo:hover img.default-img { opacity: 0; transform: scale(0.95); }
+
 
   /* WORK */
   .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -201,6 +205,44 @@
   }
   .social-card.accent .social-icon svg {
     stroke: var(--white);
+  }
+
+  .social-card.get-in-touch-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .get-in-touch-card .git-images {
+    position: absolute;
+    inset: 0;
+    top: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 2rem);
+    overflow: hidden;
+  }
+  .get-in-touch-card .git-images img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    display: block;
+  }
+  .get-in-touch-card .git-images img.hover-img {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  .get-in-touch-card:hover .git-images img.hover-img {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .get-in-touch-card:hover .git-images img.default-img {
+    opacity: 0;
+    transform: scale(0.95);
   }
 
   /* THEME TOGGLE */
@@ -629,7 +671,8 @@
     </div>
     <!-- RIGHT: tall photo -->
     <div class="about-main-photo">
-      <img src="./Image/tobiloba_profile.jpg" alt="Tobiloba Julius Adelani Portrait" />
+      <img class="default-img" src="./Image/Headshot.png" alt="Tobiloba Julius Adelani Headshot" />
+      <img class="hover-img" src="./Image/Full picture.png" alt="Tobiloba Julius Adelani Full Portrait" />
     </div>
   </div>
 </div>
@@ -885,13 +928,11 @@
         </svg>
       </div>
     </a>
-    <a href="mailto:adlanitobilobajulius@gmail.com" class="social-card accent">
+    <a href="mailto:adelanitobilobajulius@gmail.com" class="social-card get-in-touch-card">
       <span class="social-name">Get in touch</span>
-      <div class="social-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-          <polyline points="22,6 12,13 2,6" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="git-images">
+        <img class="default-img" src="./Image/get-in-touch-default.png" alt="Get in touch illustration" />
+        <img class="hover-img" src="./Image/get-in-touch-hover.png" alt="Get in touch hover illustration" />
       </div>
     </a>
   </div>
@@ -1078,7 +1119,7 @@
     },
     swiftdrop: {
       title: "Swiftdrop Logistics",
-      tag: "PRODUCT DESIGN • LOGISTICS UI • MOBILE APP",
+      tag: "PRODUCT DESIGN • LOGISTICS UI • MOBILE & WEB",
       desc: "End-to-end package tracking workflows simplified into an intuitive mobile experience.",
       images: [
         "./Image/Swiftdrop/Logostics hero section (1).jpg",
@@ -1086,7 +1127,8 @@
         "./Image/Swiftdrop/Mobile app presnetation.jpg",
         "./Image/Swiftdrop/Order Tracking screen.jpg",
         "./Image/Swiftdrop/Payment & Address Management Screen.jpg",
-        "./Image/Swiftdrop/Settings Screen.jpg"
+        "./Image/Swiftdrop/Settings Screen.jpg",
+        "./Image/Swiftdrop/Website version.png"
       ]
     }
   };
@@ -1148,6 +1190,7 @@
     { src: "./Image/Swiftdrop/Order Tracking screen.jpg", title: "Real-time Order Tracking", project: "SwiftDrop", category: "mobile" },
     { src: "./Image/Swiftdrop/Payment & Address Management Screen.jpg", title: "Address & Payment Flows", project: "SwiftDrop", category: "mobile" },
     { src: "./Image/Swiftdrop/Settings Screen.jpg", title: "Logistics App Settings", project: "SwiftDrop", category: "mobile" },
+    { src: "./Image/Swiftdrop/Website version.png", title: "Logistics Web Design (Desktop)", project: "SwiftDrop", category: "web" },
 
     // Omooba
     { src: "./Image/Omooba/Casestudy cover.jpg", title: "Traditional Fashion Cover", project: "Omooba", category: "mobile" },
