@@ -997,7 +997,6 @@
         <button class="arc-filter-btn" data-filter="mobile">Mobile UI</button>
         <button class="arc-filter-btn" data-filter="web">Websites</button>
         <button class="arc-filter-btn" data-filter="fintech">Fintech</button>
-        <button class="arc-filter-btn" data-filter="specs">UI Specs</button>
       </div>
     </div>
     <button id="arc-close-btn" class="cs-close" aria-label="Close Archive">
@@ -1069,6 +1068,8 @@
       title: "ECHOFORM™",
       tag: "UI/UX DESIGN • WEBSITE DESIGN",
       desc: "Studio booking experience designed for modern creators.",
+      thumbnail: "./Image/Echoform.jpg",
+      category: "web",
       images: [
         "./Image/Echoform/Hero section.jpg",
         "./Image/Echoform/Second section.jpg",
@@ -1082,8 +1083,10 @@
     },
     omooba: {
       title: "Omooba Trad Fashion App",
-      tag: "MOBILE UI/UX â€¢ E-COMMERCE",
+      tag: "MOBILE UI/UX • E-COMMERCE",
       desc: "Modern cultural e-commerce, reimagined for traditional African fashion.",
+      thumbnail: "./Image/Omooba.jpg",
+      category: "mobile",
       images: [
         "./Image/Omooba/Casestudy cover.jpg",
         "./Image/Omooba/Onboarding screens.jpg",
@@ -1096,6 +1099,8 @@
       title: "Vaultify Fintech Platform",
       tag: "UI/UX DESIGN • FINTECH • LANDING PAGE",
       desc: "Modern fintech experience with a dark-mode-first glassmorphism design.",
+      thumbnail: "./Image/Vaultify.jpg",
+      category: "fintech",
       images: [
         "./Image/Vaultify/Hero section.jpg",
         "./Image/Vaultify/How it works secton.jpg",
@@ -1109,6 +1114,8 @@
       title: "Rooted Studio",
       tag: "WEB DESIGN • MINIMALIST UI",
       desc: "Minimalist landing page driving high-converting client inquiries.",
+      thumbnail: "./Image/Rootedstudio.jpg",
+      category: "web",
       images: [
         "./Image/rooted studio/Hero section.jpg",
         "./Image/rooted studio/Our vision.jpg",
@@ -1121,6 +1128,8 @@
       title: "Swiftdrop Logistics",
       tag: "PRODUCT DESIGN • LOGISTICS UI • MOBILE & WEB",
       desc: "End-to-end package tracking workflows simplified into an intuitive mobile experience.",
+      thumbnail: "./Image/Swiftdrop.jpg",
+      category: "mobile",
       images: [
         "./Image/Swiftdrop/Logostics hero section (1).jpg",
         "./Image/Swiftdrop/Home screen (Onboarding).jpg",
@@ -1140,30 +1149,34 @@
   const csBody = document.getElementById('cs-modal-body');
   const csCloseBtn = document.getElementById('cs-close-btn');
 
+  function openCaseStudy(projectKey) {
+    const data = projectData[projectKey];
+    if (!data) return;
+
+    csTitle.textContent = data.title;
+    csTag.textContent = data.tag;
+    csDesc.textContent = data.desc;
+    
+    csBody.innerHTML = '';
+    data.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${data.title} - Case Study Detail`;
+      img.loading = 'lazy';
+      csBody.appendChild(img);
+    });
+
+    csModal.classList.add('active');
+    csModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('cs-open');
+    csBody.scrollTop = 0;
+  }
+
   document.querySelectorAll('.work-card[data-project]').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const projectKey = card.getAttribute('data-project');
-      const data = projectData[projectKey];
-      if (!data) return;
-
-      csTitle.textContent = data.title;
-      csTag.textContent = data.tag;
-      csDesc.textContent = data.desc;
-      
-      csBody.innerHTML = '';
-      data.images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `${data.title} - Case Study Detail`;
-        img.loading = 'lazy';
-        csBody.appendChild(img);
-      });
-
-      csModal.classList.add('active');
-      csModal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('cs-open');
-      csBody.scrollTop = 0;
+      openCaseStudy(projectKey);
     });
   });
 
@@ -1182,59 +1195,6 @@
   });
 
   // Project Archive Overlay logic
-  const archiveItems = [
-    // Swiftdrop
-    { src: "./Image/Swiftdrop/Logostics hero section (1).jpg", title: "Logistics Hero Section", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Home screen (Onboarding).jpg", title: "Logistics Onboarding", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Mobile app presnetation.jpg", title: "App Presentation Mockups", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Order Tracking screen.jpg", title: "Real-time Order Tracking", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Payment & Address Management Screen.jpg", title: "Address & Payment Flows", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Settings Screen.jpg", title: "Logistics App Settings", project: "SwiftDrop", category: "mobile" },
-    { src: "./Image/Swiftdrop/Website version.png", title: "Logistics Web Design (Desktop)", project: "SwiftDrop", category: "web" },
-
-    // Omooba
-    { src: "./Image/Omooba/Casestudy cover.jpg", title: "Traditional Fashion Cover", project: "Omooba", category: "mobile" },
-    { src: "./Image/Omooba/Onboarding screens.jpg", title: "Onboarding Screens", project: "Omooba", category: "mobile" },
-    { src: "./Image/Omooba/Home flows.jpg", title: "E-Commerce User Flows", project: "Omooba", category: "mobile" },
-    { src: "./Image/Omooba/Other core screens.jpg", title: "Customization & Details", project: "Omooba", category: "mobile" },
-    { src: "./Image/Omooba/Footer.jpg", title: "Traditional Checkout Layout", project: "Omooba", category: "mobile" },
-
-    // Vaultify
-    { src: "./Image/Vaultify/Hero section.jpg", title: "Fintech Asymmetric Hero", project: "Vaultify", category: "fintech" },
-    { src: "./Image/Vaultify/How it works secton.jpg", title: "Glow Layout Grid", project: "Vaultify", category: "fintech" },
-    { src: "./Image/Vaultify/Feature section.jpg", title: "Feature Showcase Grid", project: "Vaultify", category: "fintech" },
-    { src: "./Image/Vaultify/Pricing section.jpg", title: "Fintech Tier Matrix", project: "Vaultify", category: "fintech" },
-    { src: "./Image/Vaultify/Testimonial section.jpg", title: "Interactive Social Wall", project: "Vaultify", category: "fintech" },
-    { src: "./Image/Vaultify/footer.jpg", title: "Conversion Block & Footer", project: "Vaultify", category: "fintech" },
-
-    // Echoform
-    { src: "./Image/Echoform/Hero section.jpg", title: "Studio Booking Hero", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/Second section.jpg", title: "Visual Space Grid Layout", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/Third section.jpg", title: "Creative Storyboard Section", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/Fourth section.jpg", title: "Creative Pricing Section", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/Fifth section.jpg", title: "Space Grid Details", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/Sixth section.jpg", title: "Product Features Spec", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/seventh section.jpg", title: "Creative Layout Bento", project: "Echoform", category: "web" },
-    { src: "./Image/Echoform/footer.jpg", title: "Booking Footer Details", project: "Echoform", category: "web" },
-
-    // Rooted Studio
-    { src: "./Image/rooted studio/Hero section.jpg", title: "Minimalist Studio Hero", project: "Rooted Studio", category: "web" },
-    { src: "./Image/rooted studio/Our vision.jpg", title: "Client Vision & Core Values", project: "Rooted Studio", category: "web" },
-    { src: "./Image/rooted studio/Features.jpg", title: "Feature Grid Block", project: "Rooted Studio", category: "web" },
-    { src: "./Image/rooted studio/Our work.jpg", title: "Design Specimen Portfolio", project: "Rooted Studio", category: "web" },
-    { src: "./Image/rooted studio/Testimonials.jpg", title: "Client Endorsements Grid", project: "Rooted Studio", category: "web" },
-
-    // Randon UI
-    { src: "./Image/Randon UI/MacBook Pro 16_ - 1 (3).jpg", title: "Interactive Espec Mockup", project: "Playground", category: "specs" },
-    { src: "./Image/Randon UI/Desktop - 3 (2).jpg", title: "Fintech Dashboard Concept", project: "Playground", category: "fintech" },
-    { src: "./Image/Randon UI/Desktop - 17 (2).jpg", title: "Dark Mode Layout Spec", project: "Playground", category: "specs" },
-    { src: "./Image/Randon UI/Frame 2147226175 (1).jpg", title: "Checkout User Grid Flow", project: "Playground", category: "specs" },
-    { src: "./Image/Randon UI/20260321_140332.jpg", title: "Creative Layout Specimen", project: "Playground", category: "specs" },
-    { src: "./Image/Randon UI/20260329_115848.jpg", title: "UI Grid Spec Detail", project: "Playground", category: "specs" },
-    { src: "./Image/Randon UI/Snapchat-1265570854.jpg", title: "App Flow Spec Render", project: "Playground", category: "mobile" },
-    { src: "./Image/Randon UI/Snapchat-700927865.jpg", title: "Cultural Flow Specs", project: "Playground", category: "mobile" }
-  ];
-
   const viewAllBtn = document.querySelector('.view-all-card');
   const arcModal = document.getElementById('archive-modal');
   const arcCloseBtn = document.getElementById('arc-close-btn');
@@ -1266,23 +1226,34 @@
 
   function renderArchiveItems(filter) {
     arcGrid.innerHTML = '';
-    const itemsToRender = filter === 'all' ? archiveItems : archiveItems.filter(item => item.category === filter);
     
-    itemsToRender.forEach(item => {
+    Object.keys(projectData).forEach(key => {
+      const data = projectData[key];
+      
+      // Filter logic
+      if (filter !== 'all' && data.category !== filter) {
+        return;
+      }
+      
       const card = document.createElement('div');
       card.className = 'arc-card';
       card.innerHTML = `
         <div class="arc-thumb">
-          <img src="${item.src}" alt="${item.title}" loading="lazy" />
+          <img src="${data.thumbnail}" alt="${data.title}" loading="lazy" />
         </div>
         <div class="arc-info">
-          <h4>${item.title}</h4>
-          <p>${item.project}</p>
+          <h4>${data.title}</h4>
+          <p>${data.tag}</p>
         </div>
       `;
+      
       card.addEventListener('click', () => {
-        openLightbox(item.src);
+        closeArchiveModal();
+        setTimeout(() => {
+          openCaseStudy(key);
+        }, 300);
       });
+      
       arcGrid.appendChild(card);
     });
   }
