@@ -103,10 +103,8 @@
   .about-sm-photo { aspect-ratio: 1; border-radius: var(--r-md); overflow: hidden; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); }
   .about-sm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .about-main-photo { position: relative; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); width: 100%; aspect-ratio: 3/4; min-height: 440px; }
-  .about-main-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-  .about-main-photo img.hover-img { opacity: 0; transform: scale(1.05); }
-  .about-main-photo:hover img.hover-img { opacity: 1; transform: scale(1); }
-  .about-main-photo:hover img.default-img { opacity: 0; transform: scale(0.95); }
+  .about-main-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+  .about-main-photo:hover img { transform: scale(1.05); }
 
 
   /* WORK */
@@ -665,14 +663,13 @@
           <img src="./Image/about_process.jpg" alt="Creative Wireframes Process" />
         </div>
         <div class="about-sm-photo" style="min-height:110px;background:#c4c0ba;">
-          <img src="./Image/about_detail.jpg" alt="Design swatches detail" />
+          <img src="./Image/Full picture.png" alt="Tobiloba Julius Adelani Full Portrait" />
         </div>
       </div>
     </div>
     <!-- RIGHT: tall photo -->
     <div class="about-main-photo">
-      <img class="default-img" src="./Image/Headshot.png" alt="Tobiloba Julius Adelani Headshot" />
-      <img class="hover-img" src="./Image/Full picture.png" alt="Tobiloba Julius Adelani Full Portrait" />
+      <img src="./Image/Headshot.png" alt="Tobiloba Julius Adelani Headshot" />
     </div>
   </div>
 </div>
@@ -800,7 +797,7 @@
     <div class="play-card" style="background:#c8c3bc"><img src="./Image/Randon UI/MacBook Pro 16_ - 1 (3).jpg" alt="MacBook Pro 16 Design Specimen" /></div>
     <div class="play-card" style="background:#b5b0aa"><img src="./Image/Randon UI/20260321_140332.jpg" alt="Creative Interface Composition" /></div>
     <div class="play-card" style="background:#a8a39d"><img src="./Image/Randon UI/Desktop - 3 (2).jpg" alt="Fintech Dashboard Layout" /></div>
-    <div class="play-card" style="background:#9b9690"><img src="./Image/Randon UI/20260329_115848.jpg" alt="Sleek Visual Flow Specification" /></div>
+    <div class="play-card" style="background:#9b9690"><img src="./Image/Randon UI/Majeun.png" alt="Majeun Food Delivery Mobile UI Design" /></div>
     <div class="play-card" style="background:#c8c3bc"><img src="./Image/Randon UI/Desktop - 17 (2).jpg" alt="Dark Mode UI Screen Detail" /></div>
     <div class="play-card" style="background:#b5b0aa"><img src="./Image/Randon UI/Snapchat-1265570854.jpg" alt="Mobile App Interaction Spec" /></div>
     <div class="play-card" style="background:#a8a39d"><img src="./Image/Randon UI/Frame 2147226175 (1).jpg" alt="E-Commerce Mobile Grid flow" /></div>
@@ -1136,8 +1133,23 @@
         "./Image/Swiftdrop/Mobile app presnetation.jpg",
         "./Image/Swiftdrop/Order Tracking screen.jpg",
         "./Image/Swiftdrop/Payment & Address Management Screen.jpg",
-        "./Image/Swiftdrop/Settings Screen.jpg",
-        "./Image/Swiftdrop/Website version.png"
+        "./Image/Swiftdrop/Settings Screen.jpg"
+      ]
+    },
+    swiftdrop_desktop: {
+      title: "Swiftdrop Desktop",
+      tag: "PRODUCT DESIGN • LOGISTICS UI • WEB PLATFORM",
+      desc: "Comprehensive desktop tracking and logistics management dashboards for Swiftdrop.",
+      thumbnail: "./Image/Swiftdrop Desktop Version/Herosection..png",
+      category: "web",
+      images: [
+        "./Image/Swiftdrop Desktop Version/Herosection..png",
+        "./Image/Swiftdrop Desktop Version/How it works (1).png",
+        "./Image/Swiftdrop Desktop Version/Features.png",
+        "./Image/Swiftdrop Desktop Version/Pricing page.png",
+        "./Image/Swiftdrop Desktop Version/About us page.png",
+        "./Image/Swiftdrop Desktop Version/Help & support page.png",
+        "./Image/Swiftdrop Desktop Version/Contact us page.png"
       ]
     }
   };
