@@ -566,25 +566,24 @@
   .cs-content {
     flex: 1;
     overflow-y: auto;
-    padding: 2.5rem var(--pad);
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
+    align-items: stretch;
+    gap: 0;
     scroll-behavior: smooth;
   }
   .cs-content img {
     width: 100%;
-    max-width: 1000px;
-    border-radius: var(--r-md);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-    border: 1px solid var(--border-light);
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
     display: block;
     height: auto;
     transition: var(--transition);
   }
   body.dark .cs-content img {
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    box-shadow: none;
   }
   body.cs-open {
     overflow: hidden;
@@ -718,14 +717,28 @@
       <div class="work-thumb" style="background:#ddeeff;">
         <img src="./Image/Vaultify.jpg" alt="Vaultify" />
       </div>
-      <div class="work-info"><h3>Vaultify Fintech Landing Page</h3><p>Modern fintech experience with focused UI</p><div class="work-tags"><span class="tag">UI/UX design</span><span class="tag">Fintech</span><span class="tag">Landing page</span></div></div>
-    </a>
-
-    <a href="#" class="work-card" data-project="rooted">
-      <div class="work-thumb" style="background:#181a17;">
-        <img src="./Image/Rootedstudio.jpg" alt="Rooted Studio" />
+      <div class="work-info">
+        <h3>Vaultify Fintech Landing Page</h3>
+        <p>Modern fintech experience with focused UI</p>
+        <div class="work-tags">
+          <span class="tag">UI/UX design</span>
+          <span class="tag">Fintech</span>
+        </div>
       </div>
-      <div class="work-info"><h3>Rooted Studio</h3><p>Minimalist landing page driving converting client inquiries.</p><div class="work-tags"><span class="tag">Web Design</span><span class="tag">Minimalist UI</span><span class="tag">Conversion Focus</span></div></div>
+    </a>
+    <a href="#" class="work-card" data-project="aura">
+      <div class="work-thumb" style="background:#c0c0c0;">
+        <img src="./Image/AURA Studios/First.png" alt="AURA Studios" />
+      </div>
+      <div class="work-info">
+        <h3>AURA Studios</h3>
+        <p>Creative studio delivering immersive visual experiences.</p>
+        <div class="work-tags">
+          <span class="tag">Creative</span>
+          <span class="tag">Studio</span>
+          <span class="tag">Design</span>
+        </div>
+      </div>
     </a>
 
     <a href="#" class="work-card" data-project="swiftdrop">
@@ -760,6 +773,7 @@
         </div>
       </div>
     </a>
+
 
   </div>
 </div>
@@ -1115,12 +1129,15 @@
       thumbnail: "./Image/Vaultify.jpg",
       category: "fintech",
       images: [
-        "./Image/Vaultify/Hero section.jpg",
-        "./Image/Vaultify/How it works secton.jpg",
-        "./Image/Vaultify/Feature section.jpg",
-        "./Image/Vaultify/Pricing section.jpg",
-        "./Image/Vaultify/Testimonial section.jpg",
-        "./Image/Vaultify/footer.jpg"
+        "./Image/Vaultify/first.png",
+        "./Image/Vaultify/second.png",
+        "./Image/Vaultify/third.png",
+        "./Image/Vaultify/fourth.png",
+        "./Image/Vaultify/fifth.png",
+        "./Image/Vaultify/sixth.png",
+        "./Image/Vaultify/seventh.png",
+        "./Image/Vaultify/eighth.png",
+        "./Image/Vaultify/footer.png"
       ]
     },
     rooted: {
@@ -1131,10 +1148,14 @@
       category: "web",
       images: [
         "./Image/rooted studio/Hero section.jpg",
-        "./Image/rooted studio/Our vision.jpg",
-        "./Image/rooted studio/Features.jpg",
-        "./Image/rooted studio/Our work.jpg",
-        "./Image/rooted studio/Testimonials.jpg"
+        "./Image/rooted studio/Second.png",
+        "./Image/rooted studio/third.jpg",
+        "./Image/rooted studio/fourth.jpg",
+        "./Image/rooted studio/fifth.jpg",
+        "./Image/rooted studio/sixth.jpg",
+        "./Image/rooted studio/seventh.png",
+        "./Image/rooted studio/eighth.png",
+        "./Image/rooted studio/footer.png"
       ]
     },
     swiftdrop: {
@@ -1166,6 +1187,26 @@
         "./Image/Swiftdrop Desktop Version/About us page.png",
         "./Image/Swiftdrop Desktop Version/Help & support page.png",
         "./Image/Swiftdrop Desktop Version/Contact us page.png"
+      ]
+    },
+    aura: {
+      title: "AURA Studios",
+      tag: "CREATIVE STUDIO • DESIGN",
+      desc: "Creative studio delivering immersive visual experiences.",
+      thumbnail: "./Image/AURA Studios/First.png",
+      category: "web",
+      images: [
+        "./Image/AURA Studios/First.png",
+        "./Image/AURA Studios/second.png",
+        "./Image/AURA Studios/third.png",
+        "./Image/AURA Studios/fourth.png",
+        "./Image/AURA Studios/fifth.png",
+        "./Image/AURA Studios/sixth.png",
+        "./Image/AURA Studios/seventh.png",
+        "./Image/AURA Studios/eighth.png",
+        "./Image/AURA Studios/nineth.png",
+        "./Image/AURA Studios/tenth.png",
+        "./Image/AURA Studios/footer.png"
       ]
     },
     wildora: {
