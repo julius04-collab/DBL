@@ -1,0 +1,6 @@
+.vercel
+temp-next
+node_modules
+.git
+.gitignore
+*.md
