@@ -495,6 +495,7 @@
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     opacity: 0;
     pointer-events: none;
     transform: translateY(30px) scale(0.98);
@@ -512,9 +513,6 @@
     padding: 1.5rem var(--pad);
     border-bottom: 1px solid var(--border);
     background: var(--bg);
-    position: sticky;
-    top: 0;
-    z-index: 1010;
     transition: var(--transition);
   }
   .cs-meta {
@@ -542,6 +540,32 @@
     color: var(--mid);
     margin-top: 2px;
   }
+  .cs-proto-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    background: var(--bg);
+    border: 1.5px solid var(--btn-outline-border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, var(--transition);
+    width: fit-content;
+  }
+  .cs-proto-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .cs-proto-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
   .cs-close {
     background: transparent;
     border: 1.5px solid var(--btn-outline-border);
@@ -564,8 +588,7 @@
     transform: scale(0.95);
   }
   .cs-content {
-    flex: 1;
-    overflow-y: auto;
+    overflow-y: visible;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -723,6 +746,20 @@
         <div class="work-tags">
           <span class="tag">UI/UX design</span>
           <span class="tag">Fintech</span>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="work-card" data-project="spark">
+      <div class="work-thumb" style="background:#0d0d1a;">
+        <img src="./Image/Spark/1.png" alt="Spark" />
+      </div>
+      <div class="work-info">
+        <h3>Spark Fintech Landing Page</h3>
+        <p>Clean fintech landing page with modern dark-mode UI.</p>
+        <div class="work-tags">
+          <span class="tag">UI/UX design</span>
+          <span class="tag">Fintech</span>
+          <span class="tag">Landing page</span>
         </div>
       </div>
     </a>
@@ -999,6 +1036,14 @@
       <span id="cs-modal-tag" class="cs-tag"></span>
       <h2 id="cs-modal-title" class="cs-title"></h2>
       <p id="cs-modal-desc" class="cs-desc"></p>
+      <a id="cs-prototype-link" class="cs-proto-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        View Prototype
+      </a>
     </div>
     <button id="cs-close-btn" class="cs-close" aria-label="Close Case Study">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1136,8 +1181,26 @@
         "./Image/Vaultify/fifth.png",
         "./Image/Vaultify/sixth.png",
         "./Image/Vaultify/seventh.png",
-        "./Image/Vaultify/eighth.png",
         "./Image/Vaultify/footer.png"
+      ]
+    },
+    spark: {
+      title: "Spark Fintech Landing Page",
+      tag: "UI/UX DESIGN • FINTECH • LANDING PAGE",
+      desc: "Clean fintech landing page with modern dark-mode UI.",
+      thumbnail: "./Image/Spark/1.png",
+      category: "fintech",
+      images: [
+        "./Image/Spark/1.png",
+        "./Image/Spark/2.png",
+        "./Image/Spark/3.png",
+        "./Image/Spark/4.png",
+        "./Image/Spark/5.png",
+        "./Image/Spark/6.png",
+        "./Image/Spark/7.png",
+        "./Image/Spark/8.png",
+        "./Image/Spark/9.png",
+        "./Image/Spark/10.png"
       ]
     },
     rooted: {
@@ -1193,6 +1256,7 @@
       title: "AURA Studios",
       tag: "CREATIVE STUDIO • DESIGN",
       desc: "Creative studio delivering immersive visual experiences.",
+      prototypeLink: "https://www.figma.com/proto/SWoprlcPS71CmiBflXF5qD/Moodboard?node-id=1012-4654&t=UPXTzKXTqKYGCUO5-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A3",
       thumbnail: "./Image/AURA Studios/First.png",
       category: "web",
       images: [
@@ -1241,6 +1305,7 @@
   const csDesc = document.getElementById('cs-modal-desc');
   const csBody = document.getElementById('cs-modal-body');
   const csCloseBtn = document.getElementById('cs-close-btn');
+  const csProtoLink = document.getElementById('cs-prototype-link');
 
   function openCaseStudy(projectKey) {
     const data = projectData[projectKey];
@@ -1249,6 +1314,13 @@
     csTitle.textContent = data.title;
     csTag.textContent = data.tag;
     csDesc.textContent = data.desc;
+
+    if (data.prototypeLink) {
+      csProtoLink.href = data.prototypeLink;
+      csProtoLink.style.display = 'inline-flex';
+    } else {
+      csProtoLink.style.display = 'none';
+    }
     
     csBody.innerHTML = '';
     data.images.forEach(src => {
